@@ -17,8 +17,8 @@ RUN apt-get update \
     && apt-get remove --purge `apt-mark showauto` \
     && apt-get install dnsmasq supervisor \
     && apt-get clean all \
-    && rm -rf /var/lib/apt/lists/* 
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN mkdir -p /var/log/supervisor
-EXPOSE 53 53/udp
+EXPOSE 53/udp
 CMD ["/usr/bin/supervisord"]
